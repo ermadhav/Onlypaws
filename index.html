@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple homepage displaying 9 chart images.">
+    <title>Charts Gallery</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif; /* Standard font */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light gray background for a neutral look */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #2c3e50; /* Darker shade for the header */
+            color: #fff;
+            padding: 1rem 0; /* Vertical padding */
+            text-align: center;
+            width: 100%; /* Full width */
+            position: relative; /* Position relative for pseudo-element */
+            overflow: hidden; /* Hide overflow for rounded corners */
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1); /* Light overlay for subtle effect */
+            z-index: 0; /* Behind the text */
+        }
+
+        header h1 {
+            position: relative; /* Position text relative to the header */
+            z-index: 1; /* Bring text in front of the overlay */
+            margin: 0; /* Remove default margin */
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns layout */
+            gap: 20px;
+            width: 80%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .chart-item {
+            background: #fff; /* White background for the chart items */
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            cursor: pointer; /* Show pointer on hover */
+        }
+
+        .chart-item img {
+            width: 100%; /* Responsive image */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px 10px 0 0; /* Round top corners */
+        }
+
+        .chart-item p {
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: bold;
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+            justify-content: center; /* Center modal content */
+            align-items: center; /* Center modal content */
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block; /* Make it a block element */
+            max-width: 90%; /* Max width for the image */
+            max-height: 80%; /* Max height for the image */
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s; /* Smooth color transition */
+        }
+
+        .close:hover {
+            color: #ff6961; /* Change color on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Market Survey</h1>
+        <!-- <p>basic survey we did</p> -->
+    </header>
+
+    <div class="gallery">
+        <div class="chart-item" onclick="openModal('img/1.png')">
+            <img src="img/1.png" alt="Chart 1">
+            <p>Chart 1</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/2.png')">
+            <img src="img/2.png" alt="Chart 2">
+            <p>Chart 2</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/3.png')">
+            <img src="img/3.png" alt="Chart 3">
+            <p>Chart 3</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/4.png')">
+            <img src="img/4.png" alt="Chart 4">
+            <p>Chart 4</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/5.png')">
+            <img src="img/5.png" alt="Chart 5">
+            <p>Chart 5</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/6.png')">
+            <img src="img/6.png" alt="Chart 6">
+            <p>Chart 6</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/7.png')">
+            <img src="img/7.png" alt="Chart 7">
+            <p>Chart 7</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/8.png')">
+            <img src="img/8.png" alt="Chart 8">
+            <p>Chart 8</p>
+        </div>
+        <div class="chart-item" onclick="openModal('img/9.png')">
+            <img src="img/9.png" alt="Chart 9">
+            <p>Chart 9</p>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
+
+    <script>
+        // Function to open the modal
+        function openModal(imageSrc) {
+            document.getElementById("myModal").style.display = "flex"; // Show the modal
+            document.getElementById("img01").src = imageSrc; // Set the image source
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none"; // Hide the modal
+        }
+
+        // Close the modal when clicking anywhere outside of the image
+        window.onclick = function (event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Close the modal when pressing the ESC key
+        window.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
